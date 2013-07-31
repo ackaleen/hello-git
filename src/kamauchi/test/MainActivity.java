@@ -30,7 +30,7 @@ public class MainActivity extends Activity implements OnClickListener {
 
 			@Override
 			public void onClick(View v) {
-				startService(new Intent(getBaseContext(), TestService.class));
+				startService(new Intent(getBaseContext(), MainService.class));
 
 			}
 		});
@@ -39,7 +39,7 @@ public class MainActivity extends Activity implements OnClickListener {
 
 			@Override
 			public void onClick(View v) {
-				stopService(new Intent(getBaseContext(), TestService.class));
+				stopService(new Intent(getBaseContext(), MainService.class));
 			}
 		});
 

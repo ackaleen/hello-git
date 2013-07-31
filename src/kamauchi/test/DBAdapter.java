@@ -2,6 +2,7 @@ package kamauchi.test;
 
 import java.util.Date;
 
+import android.R.string;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
@@ -10,13 +11,20 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 public class DBAdapter {
 
-	static final String DATABASE_NAME = "mynote.db";
+	static final String DATABASE_NAME = "my.db";
 	static final int DATABASE_VERSION = 1;
 
-	public static final String TABLE_NAME = "notes";
+	public static final String TABLE_NAME = "step_log";
 	public static final String COL_ID = "_id";
 	public static final String COL_NOTE = "note";
 	public static final String COL_LASTUPDATE = "lastupdate";
+
+	public static final String LOCATION_TABLE_NAME = "location_log";
+	public static final String COL_LATITUDE = "latitude"; // 緯度
+	public static final String COL_LONGITUDE = "longitude"; // 軽度
+	public static final String COL_ALTITUDE = "altitude"; // 標高
+	public static final String COL_ACCURACY = "accuracy"; // 精度
+	public static final String COL_CREATEDATE = "createdate"; // 作成日時
 
 	protected final Context context;
 	protected DatabaseHelper dbHelper;
@@ -30,7 +38,6 @@ public class DBAdapter {
 	//
 	// SQLiteOpenHelper
 	//
-
 	private static class DatabaseHelper extends SQLiteOpenHelper {
 
 		public DatabaseHelper(Context context) {
@@ -42,6 +49,11 @@ public class DBAdapter {
 			db.execSQL("CREATE TABLE " + TABLE_NAME + " (" + COL_ID
 					+ " INTEGER PRIMARY KEY AUTOINCREMENT," + COL_NOTE
 					+ " TEXT NOT NULL," + COL_LASTUPDATE + " TEXT NOT NULL);");
+			db.execSQL("CREATE TABLE " + LOCATION_TABLE_NAME + " (" + COL_ID
+					+ " INTEGER PRIMARY KEY AUTOINCREMENT," + COL_LATITUDE
+					+ " TEXT NOT NULL," + COL_LONGITUDE + " TEXT NOT NULL,"
+					+ COL_ACCURACY + " TEXT NOT NULL," + COL_CREATEDATE
+					+ " TEXT NOT NULL);");
 		}
 
 		@Override

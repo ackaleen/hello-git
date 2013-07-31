@@ -31,6 +31,7 @@
 <!--         </activity> -->
         <activity android:name="SubActivity"></activity>
         <service android:name="TestService"></service>
+        <service android:name="MainService"></service>
     </application>
 
 </manifest>
