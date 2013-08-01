@@ -1,17 +1,25 @@
 package kamauchi.test;
 
-import android.R.string;
+import java.util.Timer;
+import java.util.TimerTask;
+
 import android.app.IntentService;
 import android.content.Context;
 import android.content.Intent;
+import android.hardware.Sensor;
+import android.hardware.SensorEvent;
+import android.hardware.SensorEventListener;
+import android.hardware.SensorManager;
 import android.os.Handler;
 import android.util.Log;
 import android.widget.Toast;
 
-public class MainService extends IntentService {
+public class MainService extends IntentService implements SensorEventListener {
 
+	private SensorManager mSensorManager;
 	private Context mContext;
 	private Handler mHandler;
+	private Timer mTimer;
 	final static String TAG = "TestService";
 
 	public MainService(String name) {
@@ -29,15 +37,25 @@ public class MainService extends IntentService {
 			
 			@Override
 			public void run() {
-				// TODO Auto-generated method stub
 				Toast.makeText(mContext, "MainService is running", Toast.LENGTH_LONG).show();
 			}
 		});
+	}
+	
+	@Override
+	public void onAccuracyChanged(Sensor sensor,int accuracy){
+		
+	}
+	
+	@Override
+	public void onSensorChanged(SensorEvent event){
+		//ここに加速度センサーのイベントを持ってくる
 	}
 
 	@Override
 	public void onCreate() {
 		super.onCreate();
+		mSensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
 		Log.d(TAG, "onCreate");
 	}
 
@@ -53,5 +71,7 @@ public class MainService extends IntentService {
 		super.onDestroy();
 		Log.d(TAG, "onDestroy");
 	}
+	
+	
 
 }
